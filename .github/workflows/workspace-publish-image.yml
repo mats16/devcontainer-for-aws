@@ -31,7 +31,7 @@ jobs:
       - name: Build
         id: build
         run: |
-          docker build -t devcontainer:latest .
+          docker build -t devcontainer:latest ./.devcontainer
           docker tag devcontainer:latest $REGISTRY_NAME/$REPO_NAME:${{ steps.sha.outputs.sha7 }}
           docker tag devcontainer:latest $REGISTRY_NAME/$REPO_NAME:latest
       - name: Push to ECR Public

@@ -17,6 +17,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends zip jq \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     # alias
+    && echo 'alias ll="ls -l"' >> ~/.bashrc \
     && echo 'alias pj="npx projen"' >> ~/.bashrc
 
 COPY ./utils/aws-sso-credential-process /usr/local/bin/aws-sso-credential-process
