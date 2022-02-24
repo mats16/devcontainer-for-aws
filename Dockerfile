@@ -1,34 +1,20 @@
-FROM jsii/superchain:1-buster-slim
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:16
 
-ARG KUBECTL_URL='https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl'
-ARG AWS_CLI_V2_URL='https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
-ARG CRED_PROCESS_URL='https://raw.githubusercontent.com/pahud/vscode/main/.devcontainer/bin/aws-sso-credential-process'
-ARG TERRAFORM_URL='https://releases.hashicorp.com/terraform/1.0.7/terraform_1.0.7_linux_amd64.zip'
+ARG DEBIAN_FRONTEND=noninteractive \
+    AWS_CLI_URL='https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
 
-USER root:root
+RUN apt update && apt -y install --no-install-recommends zip jq \
+    # install AWS CLI v2
+    && curl "${AWS_CLI_URL}" -o /tmp/awscli.zip \
+    && unzip /tmp/awscli.zip -d /tmp \
+    && /tmp/aws/install \
+    && rm -f /tmp/awscli.zip \
+    # patch for AWS AMplify/AWS CDK to use AWS SSO
+    && aws configure set credential_process aws-sso-credential-process \
+    && touch ~/.aws/credentials \
+    # Clean up
+    && apt autoremove -y \
+    && apt clean -y \
+    && rm -rf /var/lib/apt/lists/*
 
-# install jq wget
-RUN apt-get update && apt-get install -y jq wget
-
-RUN mv $(which aws) /usr/local/bin/awscliv1 && \
-  curl "${AWS_CLI_V2_URL}" -o "/tmp/awscliv2.zip" && \
-  unzip /tmp/awscliv2.zip -d /tmp && \
-  /tmp/aws/install
-
-# install kubectl
-RUN curl -o kubectl "${KUBECTL_URL}" && \
-  chmod +x kubectl && \
-  mv kubectl /usr/local/bin
-
-# install terraform
-RUN curl -o terraform.zip "${TERRAFORM_URL}" && \
-  unzip terraform.zip && \
-  mv terraform /usr/local/bin/ && \
-  rm -f terraform.zip
-
-# install aws-sso-credential-process
-RUN cd /usr/local/bin && \
-  curl -o aws-sso-credential-process "${CRED_PROCESS_URL}" && \
-  chmod +x aws-sso-credential-process
-
-USER superchain:superchain
+COPY ./utils/aws-sso-credential-process /usr/local/bin/aws-sso-credential-process

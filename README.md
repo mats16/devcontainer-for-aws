@@ -1,34 +1,31 @@
-# github-codespace
+# Dev container for AWS
 
-This is a codespace template for general AWS CDK development in **GitHub Codespace**.
+This is a codespace template for AWS in **GitHub Codespace**.
 
 public dockder image for this codespace:
 
-`public.ecr.aws/pahudnet/github-codespace:latest`
+`public.ecr.aws/mats/devcontainer-for-aws` [Gallery Link](https://gallery.ecr.aws/mats/devcontainer-for-aws)
 
+## How to use
 
-## Create AWS CDK App
+Please configure `devcontaner.json` as shown below.
 
-```bash
-npx projen new awscdk-app-ts
-```
-
-## Create AWS CDK Construct Lib
-
-```bash
-npx projen new awscdk-construct
+```json: devcontaner.json
+{
+    "image": "public.ecr.aws/mats/devcontainer-for-aws"
+}
 ```
 
 ## Configure AWS CLI V2 with AWS SSO
 
 ```bash
-aws configure sso --profile default
+aws configure sso
 ```
 
 The following example generate the SSO profile with `default` as the profile name:
 
 ```
-$ aws configure sso --profile default
+$ aws configure sso
 SSO start URL [None]: https://pahud-sso.awsapps.com/start                                                                                                                               
 SSO Region [None]: us-east-1                                                                                                                                                            
 Attempting to automatically open the SSO authorization page in your default browser.
@@ -51,24 +48,10 @@ To use this profile, specify the profile name using --profile, as shown:
 aws s3 ls --profile default        
 ```
 
-## Configure `credential_process` for the `default` profile
+## Configure `credential_process` for another profile
+
+The `default` profile is already configured.
 
 ```sh
-aws configure set credential_process ${PWD}/utils/aws-sso-credential-process
-```
-
-export `AWS_SHARED_CREDENTIALS_FILE` 
-
-```sh
-export AWS_SHARED_CREDENTIALS_FILE=~/.aws/config
-```
-
-## Start your CDK development
-
-You should be able to run the CDK CLI now.
-
-```sh
-$ cdk diff
-$ cdk deploy
-$ cdk destroy
+aws configure set credential_process aws-sso-credential-process --profile <profile_name>
 ```
