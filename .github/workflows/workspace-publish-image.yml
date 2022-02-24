@@ -30,14 +30,10 @@ jobs:
           aws-region: us-east-1
       - name: Build
         id: build
-        run: |
-          docker build -t public.ecr.aws/mats/${{ steps.repoName.outputs.reponame }}:latest .
-      - name: Login to ECR Public
-        id: login
-        run: |
-          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/mats
+        run: docker build -t public.ecr.aws/mats/${{ steps.repoName.outputs.reponame }}:latest .   
       - name: Push to ECR Public
         id: push
         run: |
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/mats
           docker push public.ecr.aws/mats/${{ steps.repoName.outputs.reponame }}:latest
 
