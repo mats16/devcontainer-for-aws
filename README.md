@@ -6,15 +6,6 @@ public dockder image for this codespace:
 
 `public.ecr.aws/mats/devcontainer-for-aws` [Gallery Link](https://gallery.ecr.aws/mats/devcontainer-for-aws)
 
-## How to use
-
-Please configure `devcontaner.json` as shown below.
-
-```json: devcontaner.json
-{
-    "image": "public.ecr.aws/mats/devcontainer-for-aws"
-}
-```
 
 ## Configure AWS CLI V2 with AWS SSO
 
@@ -51,6 +42,7 @@ aws s3 ls --profile default
 ## Configure `credential_process` for another profile
 
 The `default` profile is already configured.
+If you want to use another profile, Please configure as shown below.
 
 ```sh
 aws configure set credential_process aws-sso-credential-process --profile <profile_name>
