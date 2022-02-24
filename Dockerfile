@@ -9,12 +9,14 @@ RUN apt-get update && apt-get -y install --no-install-recommends zip jq \
     && unzip /tmp/awscli.zip -d /tmp \
     && /tmp/aws/install \
     && rm -f /tmp/awscli.zip \
-    # patch for AWS AMplify/AWS CDK to use AWS SSO
+    # patch for AWS Amplify/AWS CDK to use AWS SSO
     && aws configure set credential_process aws-sso-credential-process \
     && touch ~/.aws/credentials \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    # alias
+    && echo 'alias pj="npx projen"' >> ~/.bashrc
 
 COPY ./utils/aws-sso-credential-process /usr/local/bin/aws-sso-credential-process
