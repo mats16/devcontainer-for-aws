@@ -75,6 +75,7 @@ jobs:
           images: |
             ghcr.io/${{ github.repository }}
           flavor: |
+            latest=false
             suffix=alpine,onlatest=true
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
