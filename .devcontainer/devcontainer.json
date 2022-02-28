@@ -1,6 +1,6 @@
 {
     "name": "Dev Container Definition - AWS",
-    "image": "public.ecr.aws/mats/devcontainer-for-aws:latest",
+    "image": "ghcr.io/mats16/devcontainer-for-aws:latest",
     "extensions": [
         "dbaeumer.vscode-eslint"
     ]

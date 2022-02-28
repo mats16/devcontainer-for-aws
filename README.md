@@ -4,7 +4,7 @@ This is a codespace template for AWS in **GitHub Codespace**.
 
 public dockder image for this codespace:
 
-`public.ecr.aws/mats/devcontainer-for-aws` [Gallery Link](https://gallery.ecr.aws/mats/devcontainer-for-aws)
+`ghcr.io/mats16/devcontainer-for-aws:latest` [Github Container Registry](https://github.com/mats16/devcontainer-for-aws/pkgs/container/devcontainer-for-aws)
 
 
 ## Configure AWS CLI V2 with AWS SSO
