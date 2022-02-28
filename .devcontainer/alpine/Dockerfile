@@ -23,7 +23,7 @@ RUN apk --no-cache add binutils curl \
     && aws configure set credential_process aws-sso-credential-process \
     && touch ~/.aws/credentials \
     # install node.js for AWS CDK or other tools
-    && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm \
+    && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm yarn\
     # alias
     && cat /tmp/alias.txt >> ~/.bashrc
 
