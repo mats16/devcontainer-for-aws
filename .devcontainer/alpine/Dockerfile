@@ -27,4 +27,4 @@ RUN apk --no-cache add binutils curl \
     # alias
     && cat /tmp/alias.txt >> ~/.bashrc
 
-ENV SHELL=/bin/bash
+ENV SHELL=/bin/zsh
