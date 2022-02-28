@@ -24,4 +24,4 @@ RUN apk --no-cache add binutils curl \
     # install node.js for AWS CDK or other tools
     && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm
 
-CMD ['/bin/bash']
+ENV SHELL=/bin/bash
