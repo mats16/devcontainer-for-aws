@@ -3,6 +3,9 @@ FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:16
 ARG DEBIAN_FRONTEND=noninteractive \
     AWS_CLI_URL='https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
 
+COPY ./utils/aws-sso-credential-process /usr/local/bin/aws-sso-credential-process
+COPY ./utils/alias.txt /tmp/alias.txt
+
 RUN apt-get update && apt-get -y install --no-install-recommends zip jq \
     # install AWS CLI v2
     && curl "${AWS_CLI_URL}" -o /tmp/awscli.zip \
@@ -15,6 +18,6 @@ RUN apt-get update && apt-get -y install --no-install-recommends zip jq \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
-
-COPY ./utils/aws-sso-credential-process /usr/local/bin/aws-sso-credential-process
+    && rm -rf /var/lib/apt/lists/* \
+    # alias
+    && cat /tmp/alias.txt >> ~/.bashrc

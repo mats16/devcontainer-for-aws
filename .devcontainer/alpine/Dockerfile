@@ -5,6 +5,7 @@ ARG NODEJS_VERSION=16 \
     AWS_CLI_URL='https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
 
 COPY ./utils/aws-sso-credential-process /usr/local/bin/aws-sso-credential-process
+COPY ./utils/alias.txt /tmp/alias.txt
 
 RUN apk --no-cache add binutils curl \
     # install glibc
@@ -22,6 +23,8 @@ RUN apk --no-cache add binutils curl \
     && aws configure set credential_process aws-sso-credential-process \
     && touch ~/.aws/credentials \
     # install node.js for AWS CDK or other tools
-    && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm
+    && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm \
+    # alias
+    && cat /tmp/alias.txt >> ~/.bashrc
 
 ENV SHELL=/bin/bash
