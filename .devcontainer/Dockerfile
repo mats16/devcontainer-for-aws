@@ -23,8 +23,10 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /
     && apt-get update && apt-get -y install --no-install-recommends docker-ce-cli
 
 COPY ./utils/alias.txt /tmp/alias.txt
-RUN cat /tmp/alias.txt >> ~/.bashrc \
+RUN cat /tmp/alias.txt >> ~/.zshrc \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+
+ENV SHELL=/bin/zsh
