@@ -1,5 +1,5 @@
 {
-    "name": "Dev Container Definition - AWS",
+    "name": "Dev Container Definition - AWS CDK",
     "image": "ghcr.io/mats16/devcontainer-for-aws:latest",
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
