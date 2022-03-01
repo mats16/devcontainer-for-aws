@@ -22,7 +22,7 @@ RUN apk --no-cache add binutils curl \
     && touch ~/.aws/credentials
 
 COPY ./utils/alias.txt /tmp/alias.txt
-RUN cat /tmp/alias.txt >> ~/.zshrc
+RUN cat /tmp/alias.txt >> ~/.zshrc \
     && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm yarn docker-cli
 
 ENV SHELL=/bin/zsh
