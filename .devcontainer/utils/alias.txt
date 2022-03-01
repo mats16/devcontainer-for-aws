@@ -1,1 +1,2 @@
 alias pj="npx projen"
+alias cdk="$(npm bin)/cdk"
