@@ -1,16 +1,27 @@
 # Dev container for AWS
 
-This is a codespace template for AWS in **GitHub Codespace**.
+This is a codespace template for AWS CDK in **GitHub Codespace**.
 
 public dockder image for this codespace:
 
 `ghcr.io/mats16/devcontainer-for-aws:latest` [Github Container Registry](https://github.com/mats16/devcontainer-for-aws/pkgs/container/devcontainer-for-aws)
 
+## Create AWS CDK App
+
+```bash
+pj new awscdk-app-ts
+```
+
+## Create AWS CDK Construct Lib
+
+```bash
+pj new awscdk-construct
+```
 
 ## Configure AWS CLI V2 with AWS SSO
 
 ```bash
-aws configure sso
+aws configure sso --profile default
 ```
 
 The following example generate the SSO profile with `default` as the profile name:
