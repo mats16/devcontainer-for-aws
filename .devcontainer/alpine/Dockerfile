@@ -4,11 +4,9 @@ ARG NODEJS_VERSION=16 \
     GLIBC_VER=2.34-r0 \
     AWS_CLI_URL='https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
 
+# install AWS CLI v2
 COPY ./utils/aws-sso-credential-process /usr/local/bin/aws-sso-credential-process
-COPY ./utils/alias.txt /tmp/alias.txt
-
 RUN apk --no-cache add binutils curl \
-    # install glibc
     && curl -sL https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub \
     && curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VER}/glibc-${GLIBC_VER}.apk \
     && curl -sLO https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VER}/glibc-bin-${GLIBC_VER}.apk \
@@ -21,10 +19,11 @@ RUN apk --no-cache add binutils curl \
     && rm -f awscli.zip \
     # patch for AWS Amplify/AWS CDK to use AWS SSO
     && aws configure set credential_process aws-sso-credential-process \
-    && touch ~/.aws/credentials \
+    && touch ~/.aws/credentials
+
+COPY ./utils/alias.txt /tmp/alias.txt
+RUN cat /tmp/alias.txt >> ~/.zshrc
     # install node.js for AWS CDK or other tools
-    && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm yarn\
-    # alias
-    && cat /tmp/alias.txt >> ~/.zshrc
+    && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm yarn
 
 ENV SHELL=/bin/zsh
