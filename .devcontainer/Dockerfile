@@ -13,11 +13,18 @@ RUN apt-get update && apt-get -y install --no-install-recommends zip jq \
     && rm -f /tmp/awscli.zip \
     # patch for AWS Amplify/AWS CDK to use AWS SSO
     && aws configure set credential_process aws-sso-credential-process \
-    && touch ~/.aws/credentials \
+    && touch ~/.aws/credentials 
+
+# install docker-cli
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo \
+      "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+      $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt-get update && apt-get -y install --no-install-recommends docker-ce-cli
+
+COPY ./utils/alias.txt /tmp/alias.txt
+RUN cat /tmp/alias.txt >> ~/.bashrc \
     # Clean up
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
-
-COPY ./utils/alias.txt /tmp/alias.txt
-RUN cat /tmp/alias.txt >> ~/.bashrc

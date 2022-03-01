@@ -23,7 +23,6 @@ RUN apk --no-cache add binutils curl \
 
 COPY ./utils/alias.txt /tmp/alias.txt
 RUN cat /tmp/alias.txt >> ~/.zshrc
-    # install node.js for AWS CDK or other tools
-    && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm yarn
+    && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm yarn docker-cli
 
 ENV SHELL=/bin/zsh
