@@ -25,4 +25,5 @@ COPY ./utils/alias.txt /tmp/alias.txt
 RUN cat /tmp/alias.txt >> ~/.zshrc \
     && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm yarn docker-cli
 
-ENV SHELL=/bin/zsh
+ENV SHELL=/bin/zsh \
+    DOCKER_BUILDKIT=1
