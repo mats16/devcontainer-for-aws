@@ -29,4 +29,5 @@ RUN cat /tmp/alias.txt >> ~/.zshrc \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-ENV SHELL=/bin/zsh
+ENV SHELL=/bin/zsh \
+    DOCKER_BUILDKIT=1
