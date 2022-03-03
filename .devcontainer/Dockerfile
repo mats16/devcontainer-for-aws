@@ -22,6 +22,7 @@ RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /
       $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null \
     && apt-get update && apt-get -y install --no-install-recommends docker-ce-cli
 
+COPY ./utils/first-run-notice.txt /usr/local/etc/vscode-dev-containers/first-run-notice.txt
 COPY ./utils/alias.txt /tmp/alias.txt
 RUN cat /tmp/alias.txt >> ~/.zshrc \
     # Clean up

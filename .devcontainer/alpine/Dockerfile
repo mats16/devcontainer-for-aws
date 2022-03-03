@@ -21,6 +21,7 @@ RUN apk --no-cache add binutils curl \
     && aws configure set credential_process aws-sso-credential-process \
     && touch ~/.aws/credentials
 
+COPY ./utils/first-run-notice.txt /usr/local/etc/vscode-dev-containers/first-run-notice.txt
 COPY ./utils/alias.txt /tmp/alias.txt
 RUN cat /tmp/alias.txt >> ~/.zshrc \
     && apk add --no-cache nodejs~="${NODEJS_VERSION}" npm yarn docker-cli

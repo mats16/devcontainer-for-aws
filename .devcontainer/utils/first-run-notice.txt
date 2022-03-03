@@ -1,0 +1,5 @@
+👋 Welcome! You are on a custom image defined in your devcontainer.json file.
+
+Login to AWS SSO: `aws configure sso --profile default`
+
+Create new AWS CDK app: `npx projen new awscdk-app-ts`
