@@ -10,10 +10,7 @@ RUN apt-get update && apt-get -y install --no-install-recommends zip jq \
     && curl "${AWS_CLI_URL}" -o /tmp/awscli.zip \
     && unzip /tmp/awscli.zip -d /tmp \
     && /tmp/aws/install \
-    && rm -f /tmp/awscli.zip \
-    # patch for AWS Amplify/AWS CDK to use AWS SSO
-    && aws configure set credential_process aws-sso-credential-process \
-    && touch ~/.aws/credentials 
+    && rm -f /tmp/awscli.zip
 
 # install docker-cli
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
