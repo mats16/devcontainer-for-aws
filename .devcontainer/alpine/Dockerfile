@@ -16,10 +16,7 @@ RUN apk --no-cache add binutils curl \
     && curl -sL "${AWS_CLI_URL}" -o awscli.zip \
     && unzip -q awscli.zip \
     && aws/install \
-    && rm -f awscli.zip \
-    # patch for AWS Amplify/AWS CDK to use AWS SSO
-    && aws configure set credential_process aws-sso-credential-process \
-    && touch ~/.aws/credentials
+    && rm -f awscli.zip
 
 COPY ./utils/first-run-notice.txt /usr/local/etc/vscode-dev-containers/first-run-notice.txt
 COPY ./utils/alias.txt /tmp/alias.txt
