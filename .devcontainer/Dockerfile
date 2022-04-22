@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:16
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:14
 
 ARG DEBIAN_FRONTEND=noninteractive \
     AWS_CLI_URL='https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
