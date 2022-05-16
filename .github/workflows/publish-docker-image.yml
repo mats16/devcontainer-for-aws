@@ -32,7 +32,6 @@ jobs:
             ghcr.io/${{ github.repository }}
           flavor: |
             latest=true
-            #prefix=-node16
           tags: |
             type=schedule,pattern={{date 'YYYYMMDD'}}
             type=raw,value=node16
@@ -67,10 +66,7 @@ jobs:
         with:
           images: |
             ghcr.io/${{ github.repository }}
-          #flavor: |
-          #  prefix=-node18
           tags: |
-            #type=schedule,pattern={{date 'YYYYMMDD'}}
             type=raw,value=node16
 
       - name: Build and push Docker image
@@ -104,10 +100,7 @@ jobs:
         with:
           images: |
             ghcr.io/${{ github.repository }}
-          #flavor: |
-          #  prefix=-node14
           tags: |
-            #type=schedule,pattern={{date 'YYYYMMDD'}}
             type=raw,value=node14
 
       - name: Build and push Docker image
@@ -141,10 +134,7 @@ jobs:
         with:
           images: |
             ghcr.io/${{ github.repository }}
-          #flavor: |
-          #  prefix=-node16-alpine
           tags: |
-            #type=schedule,pattern={{date 'YYYYMMDD'}}
             type=raw,value=node16-alpine
 
       - name: Build and push Docker image
