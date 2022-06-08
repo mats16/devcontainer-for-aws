@@ -52,7 +52,8 @@ aws s3 ls --profile default
 
 ## Configure `credential_process` for another profile
 
-The `default` profile is already configured.
+** Currently AWS CDK supports AWS SSO, so this configuration is not necessary. **
+
 If you want to use another profile, Please configure as shown below.
 
 ```sh
